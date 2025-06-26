@@ -19,9 +19,26 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   void _saveScore() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return;
-    
+  final user = FirebaseAuth.instance.currentUser;
+  if (user == null) return;
+
+  final userScoreRef = FirebaseFirestore.instance.collection('leaderboard').doc(user.uid);
+
+  final doc = await userScoreRef.get();
+
+  if (!doc.exists || (doc.data()?['score'] ?? 0) < widget.score) {
+      await userScoreRef.set({
+        'uid': user.uid,
+        'email': user.email,
+        'score': widget.score,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+      print("Nouveau meilleur score enregistré");
+    } else {
+      print("Score non enregistré car moins bon que le précédent");
+    }
+
+    // Facultatif : tu peux aussi toujours enregistrer l'historique dans "scores"
     await FirebaseFirestore.instance.collection('scores').add({
       'uid': user.uid,
       'email': user.email,
@@ -29,6 +46,7 @@ class _ResultScreenState extends State<ResultScreen> {
       'timestamp': FieldValue.serverTimestamp(),
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
