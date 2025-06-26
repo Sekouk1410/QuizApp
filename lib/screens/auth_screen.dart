@@ -15,9 +15,15 @@ class _AuthScreenState extends State<AuthScreen> {
   final _passwordController = TextEditingController();
   bool isLogin = true; // Toggle entre inscription et connexion
   String errorMessage = '';
+  bool _isLoading = false;
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
+
+    setState(() {
+      _isLoading = true; // On lance le loader
+      errorMessage = '';
+    });
 
     try {
       if (isLogin) {
@@ -26,10 +32,7 @@ class _AuthScreenState extends State<AuthScreen> {
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const HomeScreen()),
-        );
+        
 
 
       } else {
@@ -38,16 +41,27 @@ class _AuthScreenState extends State<AuthScreen> {
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
-        Navigator.pushReplacement(
+        
+      }
+
+      if (!mounted) return; // On vérifie que le widget est encore "vivant"
+
+      Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => const HomeScreen()),
-        );
+      );
 
-      }
     } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
       setState(() {
         errorMessage = e.message ?? "Erreur inconnue";
       });
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false; // 🔁 On arrête le loader
+        });
+      }
     }
   }
 

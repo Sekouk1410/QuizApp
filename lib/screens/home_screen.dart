@@ -46,11 +46,12 @@ class HomeScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text(
-                        "Bienvenue dans le Quiz 🎉",
+                        "Bienvenue dans le Quiz sur le Mali 🇲🇱",
                         style: TextStyle(
-                          fontSize: 26,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
@@ -60,6 +61,13 @@ class HomeScreen extends StatelessWidget {
                       Text(
                         user?.email ?? 'Utilisateur',
                         style: const TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        "Testez vos connaissances et découvrez la richesse culturelle du Mali à travers notre quiz captivant. "
+                        "Que vous soyez curieux ou expert, ce jeu est fait pour vous !",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16, color: Colors.black87),
                       ),
                       const SizedBox(height: 20),
                       Image.network(

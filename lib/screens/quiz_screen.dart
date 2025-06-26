@@ -88,7 +88,7 @@ class _QuizScreenState extends State<QuizScreen> {
     Future.delayed(const Duration(seconds: 2), _nextQuestion);
   }
 
-  void _nextQuestion() {
+  Future<void> _nextQuestion() async {
     if (_currentIndex < _questions.length - 1) {
       setState(() {
         _currentIndex++;
@@ -100,6 +100,7 @@ class _QuizScreenState extends State<QuizScreen> {
       _startTimer();
     } else {
       _timer?.cancel();
+      await _firestoreService.saveUserScore(_score);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => ResultScreen(score: _score),

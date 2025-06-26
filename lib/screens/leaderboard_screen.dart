@@ -7,29 +7,31 @@ class LeaderboardScreen extends StatelessWidget {
   Future<List<Map<String, dynamic>>> _getTopScores() async {
     final snapshot = await FirebaseFirestore.instance
         .collection('scores')
-        .orderBy('score', descending: true)
-        .get();
+        .get(); // on récupère tout
 
-    final seenUids = <String>{};
-    final topUsers = <Map<String, dynamic>>[];
+    final Map<String, Map<String, dynamic>> bestScores = {};
 
     for (var doc in snapshot.docs) {
       final data = doc.data();
       final uid = data['uid'];
+      final score = data['score'];
 
-      if (!seenUids.contains(uid)) {
-        seenUids.add(uid);
-        topUsers.add({
+      // si l'utilisateur n'existe pas ou a un score inférieur, on garde le meilleur
+      if (!bestScores.containsKey(uid) || bestScores[uid]!['score'] < score) {
+        bestScores[uid] = {
           'email': data['email'],
-          'score': data['score'],
-        });
+          'score': score,
+        };
       }
-
-      if (topUsers.length == 10) break; // Top 10 uniquement
     }
 
-    return topUsers;
+    // convertir en liste, trier par score décroissant, et prendre les 10 meilleurs
+    final topUsers = bestScores.values.toList()
+      ..sort((a, b) => (b['score'] as int).compareTo(a['score'] as int));
+
+    return topUsers.take(10).toList();
   }
+
 
   @override
   Widget build(BuildContext context) {
