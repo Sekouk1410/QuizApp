@@ -61,7 +61,7 @@ class _ResultScreenState extends State<ResultScreen> {
               Icon(
                 widget.score >= 5 ? Icons.emoji_events : Icons.sentiment_dissatisfied,
                 size: 80,
-                color: widget.score >= 5 ? Colors.amber : Colors.blueAccent,
+                color: widget.score >= 5 ? Colors.amber : Color(0xFF77161F),
               ),
               const SizedBox(height: 24),
               Text(
@@ -96,7 +96,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueAccent,
+                    backgroundColor: Color(0xFF77161F),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -104,7 +104,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   ),
                   child: const Text(
                     "Retour à l'accueil",
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ),
               ),

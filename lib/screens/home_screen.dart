@@ -23,12 +23,20 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF0F4FF),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFF77161F),
         elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            backgroundColor: Colors.white,
+            child: Image.asset('assets/images/logo.png', width: 50, height: 50, fit: BoxFit.cover ,),
+          ),
+        ),
+        title: Text('Faso Don', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),),
         actions: [
           IconButton(
             onPressed: () => _logout(context),
-            icon: const Icon(Icons.logout, color: Colors.black87),
+            icon: const Icon(Icons.logout, color: Colors.white),
             tooltip: "Se déconnecter",
           ),
         ],
@@ -64,14 +72,13 @@ class HomeScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        "Testez vos connaissances et découvrez la richesse culturelle du Mali à travers notre quiz captivant. "
-                        "Que vous soyez curieux ou expert, ce jeu est fait pour vous !",
+                        "Le Mali, ses origines, son histoire… un quiz à la fois.",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 16, color: Colors.black87),
                       ),
                       const SizedBox(height: 20),
-                      Image.network(
-                        "https://cdn-icons-png.flaticon.com/512/6334/6334240.png",
+                      Image.asset(
+                        'assets/images/imgAccueil.jpg',
                         height: 120,
                       ),
                     ],

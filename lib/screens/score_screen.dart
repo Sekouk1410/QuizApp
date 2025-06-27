@@ -23,9 +23,15 @@ class ScoreScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text("Mes scores"),
-        backgroundColor: Colors.blueAccent,
+        title: const Text("Mes scores", style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF77161F),
         elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.chevron_left, color: Colors.white),
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -36,7 +42,7 @@ class ScoreScreen extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: CircularProgressIndicator(color: Colors.blueAccent),
+              child: CircularProgressIndicator(color: Color(0xFF77161F)),
             );
           }
 
@@ -77,8 +83,8 @@ class ScoreScreen extends StatelessWidget {
                 ),
                 child: ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: Colors.blueAccent.withOpacity(0.2),
-                    child: Icon(Icons.star, color: Colors.blueAccent),
+                    backgroundColor: Color(0xFF77161F).withOpacity(0.2),
+                    child: Icon(Icons.star, color: Color(0xFF77161F)),
                   ),
                   title: Text(
                     "Score : $score / 10",

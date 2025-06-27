@@ -161,7 +161,7 @@ Widget build(BuildContext context) {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const CircularProgressIndicator(
-              color: Colors.blueAccent,
+              color: Color(0xFF77161F),
               strokeWidth: 4,
             ),
             const SizedBox(height: 20),
@@ -182,9 +182,15 @@ Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text('Quiz'),
-        backgroundColor: Colors.blueAccent,
+        title: const Text('Quiz',style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF77161F),
         elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.chevron_left, color: Colors.white),
+        ),
       ),
       body: Center(
         child: Padding(
@@ -225,14 +231,14 @@ Widget build(BuildContext context) {
                   _loadQuestions();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor: Color(0xFF77161F),
                   padding: const EdgeInsets.symmetric(
                       horizontal: 32, vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text('Réessayer'),
+                child: const Text('Réessayer', style: TextStyle(color: Colors.white),),
               ),
             ],
           ),
@@ -247,8 +253,14 @@ Widget build(BuildContext context) {
   return Scaffold(
     backgroundColor: Colors.grey[50],
     appBar: AppBar(
-      title: Text('Question ${_currentIndex + 1}/${_questions.length}'),
-      backgroundColor: Colors.blueAccent,
+      title: Text('Question ${_currentIndex + 1}/${_questions.length}', style: TextStyle(color: Colors.white),),
+      backgroundColor: Color(0xFF77161F),
+      leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.chevron_left, color: Colors.white),
+        ),
       elevation: 0,
       actions: [
         Padding(
@@ -281,7 +293,7 @@ Widget build(BuildContext context) {
           LinearProgressIndicator(
             value: _progress,
             minHeight: 8,
-            color: _timeLeft <= 3 ? Colors.red : Colors.blueAccent,
+            color: _timeLeft <= 3 ? Colors.red : Color(0xFF77161F),
             backgroundColor: Colors.grey[200],
             borderRadius: BorderRadius.circular(4),
           ),
@@ -348,7 +360,7 @@ Widget build(BuildContext context) {
                 'Temps restant: $_timeLeft secondes',
                 style: TextStyle(
                   fontSize: 16,
-                  color: _timeLeft <= 3 ? Colors.red : Colors.blueAccent,
+                  color: _timeLeft <= 3 ? Colors.red : Color(0xFF77161F),
                   fontWeight: FontWeight.bold,
                 ),
               ),

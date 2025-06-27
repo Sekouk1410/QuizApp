@@ -36,12 +36,21 @@ class LeaderboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Top 10 des scores")),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF77161F),
+        title: const Text("Top 10 des scores",style: TextStyle(color: Colors.white)),
+         leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.chevron_left, color: Colors.white),
+        ),
+        ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _getTopScores(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator( color: Color(0xFF77161F),));
           }
 
           final scores = snapshot.data ?? [];
@@ -56,7 +65,7 @@ class LeaderboardScreen extends StatelessWidget {
               final user = scores[index];
               return ListTile(
                 leading: CircleAvatar(
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor: Color(0xFF77161F),
                   child: Text("${index + 1}", style: const TextStyle(color: Colors.white)),
                 ),
                 title: Text(user['email'] ?? "Utilisateur inconnu"),

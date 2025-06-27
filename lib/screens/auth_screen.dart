@@ -68,9 +68,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(isLogin ? 'Connexion' : 'Inscription'),
-      ),
+      
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -78,23 +76,79 @@ class _AuthScreenState extends State<AuthScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Email
-              TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) =>
-                    value!.isEmpty ? 'Entrez un email' : null,
-              ),
+               Image.asset(
+                        'assets/images/logo.png',
+                        height: 200,
+                        width: 200,
+                      ),
+
+                      const  SizedBox(height: 10,),
+                      Text('Faso Don', 
+                      style: TextStyle(fontSize: 30, color: Color(0xFF77161F), fontWeight: FontWeight.w900),
+                      ),
+                      
+
+                       const  SizedBox(height: 20,),
+             TextFormField(
+  controller: _emailController,
+  decoration: InputDecoration(
+    labelText: 'Email',
+    labelStyle: const TextStyle(
+      color: Colors.grey,
+      fontWeight: FontWeight.w500,
+    ),
+    filled: true,
+    fillColor: Colors.grey[100],
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(color: Colors.transparent),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(color: Colors.transparent),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(color: Color(0xFF77161F), width: 2),
+    ),
+    prefixIcon: const Icon(Icons.email_outlined),
+  ),
+  keyboardType: TextInputType.emailAddress,
+  validator: (value) =>
+      value == null || value.isEmpty ? 'Entrez un email' : null,
+),
+
               const SizedBox(height: 10),
               // Mot de passe
               TextFormField(
-                controller: _passwordController,
-                decoration: const InputDecoration(labelText: 'Mot de passe'),
-                obscureText: true,
-                validator: (value) =>
-                    value!.length < 6 ? 'Minimum 6 caractères' : null,
-              ),
+  controller: _passwordController,
+  decoration: InputDecoration(
+    labelText: 'Mot de passe',
+    labelStyle: const TextStyle(
+      color: Colors.grey,
+      fontWeight: FontWeight.w500,
+    ),
+    filled: true,
+    fillColor: Colors.grey[100],
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(color: Colors.transparent),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(color: Colors.transparent),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(color: Color(0xFF77161F), width: 2),
+    ),
+    prefixIcon: const Icon(Icons.lock_outline),
+  ),
+  obscureText: true,
+  validator: (value) =>
+      value != null && value.length < 6 ? 'Minimum 6 caractères' : null,
+),
+
               const SizedBox(height: 20),
 
               // Erreur si existante
@@ -104,10 +158,23 @@ class _AuthScreenState extends State<AuthScreen> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _submit,
-                child: Text(isLogin ? 'Se connecter' : "S'inscrire"),
+                
+                style:  ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF77161F), // couleur de fond (bordeaux foncé)
+                  foregroundColor: Colors.white, // couleur du texte
+                   minimumSize: const Size(400, 50), // largeur: 200, hauteur: 50
+                  padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  elevation: 3,
+                ),
+                child: Text(isLogin ? 'Se connecter' : "S'inscrire", style: TextStyle(color: Colors.white, fontSize: 20),),
               ),
 
+           
               TextButton(
+                
                 onPressed: () => setState(() => isLogin = !isLogin),
                 child: Text(isLogin
                     ? "Pas encore inscrit ? Créez un compte"
