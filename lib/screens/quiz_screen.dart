@@ -110,7 +110,7 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   void _startTimer() {
-    _timeLeft = 10;
+    _timeLeft = 30;
     _progress = 1.0;
     _timer?.cancel();
 
@@ -126,7 +126,7 @@ class _QuizScreenState extends State<QuizScreen> {
       } else {
         setState(() {
           _timeLeft--;
-          _progress = _timeLeft / 10;
+          _progress = _timeLeft / 30;
         });
       }
     });
